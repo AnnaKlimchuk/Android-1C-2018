@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="person">user</string>
+    <string name="welcome">Hello</string>
+    <string name="hint_for_name">put hear your name</string>
+    <string name="to_first_activity">Go to start screen</string>
+    <string name="send_email">send email</string>
+    <string name="open_profile">open profile</string>
+    <string name="training_thread">training</string>
+    <string name="email_text">Welcome letter from %s</string>
+    <string name="person_name">Nick Wilde, fox</string>
+    <string name="person_description">write here the description of the person</string>
+    <string name="person_birthday">press to set birthday</string>
+    <string name="OK">OK</string>
+</resources>
