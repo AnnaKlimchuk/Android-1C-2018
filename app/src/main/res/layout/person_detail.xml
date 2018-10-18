@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main4Activity">
+    tools:context=".PersonDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,6 +23,7 @@
                 android:layout_height="150dp"
                 android:src="@drawable/zootopia_fox"
                 android:scaleType="centerInside"
+                android:contentDescription="@string/person_image"
                 android:background="@color/colorGreen"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp" />
@@ -54,7 +55,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
             <EditText
                 android:id="@+id/person_description"
@@ -62,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/person_description"
                 android:inputType="textMultiLine"
-                android:scrollbars="vertical"/>
+                android:scrollbars="vertical" />
 
         </ScrollView>
     </LinearLayout>

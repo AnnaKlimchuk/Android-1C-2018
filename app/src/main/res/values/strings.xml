@@ -12,4 +12,5 @@
     <string name="person_description">write here the description of the person</string>
     <string name="person_birthday">press to set birthday</string>
     <string name="OK">OK</string>
+    <string name="person_image">This is the picture of the person</string>
 </resources>

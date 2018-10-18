@@ -19,7 +19,7 @@ public class Main2Activity extends AppCompatActivity {
 
         imageButton = findViewById(R.id.moving_button);
         imageButton.setOnClickListener(view -> {
-            Intent startActivity = new Intent(this, Main3Activity.class);
+            Intent startActivity = new Intent(this, Main6Activity.class);
             startActivity(startActivity);
         });
 
