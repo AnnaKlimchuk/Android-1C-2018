@@ -18,7 +18,7 @@ public class PersonStorage {
         persons.put(id, new Person(id, name, "", imageRes, "press to set birthday"));
     }
 
-    // TODO делать set
+    // TODO делать setInitialData один раз за всё приложение
     public static void setInitialData(){
         addPerson("Judy Hopps, rabbit", R.drawable.zootopia_rabbit);
         addPerson("Nick Wilde, red fox", R.drawable.zootopia_fox);

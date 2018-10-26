@@ -27,10 +27,10 @@ public class PersonBirthdayActivity extends AppCompatActivity {
                 today.get(Calendar.DAY_OF_MONTH), (DatePicker view,
                                                    int year,
                                                    int monthOfYear,
-                                                   int dayOfMonth) -> {
-            startActivity.putExtra(getString(R.string.person_birthday),
-                    dayOfMonth + "." + (monthOfYear + 1) + "." + year);
-        });
+                                                   int dayOfMonth) ->
+                        startActivity.putExtra(getString(R.string.person_birthday),
+                                dayOfMonth + "." + (monthOfYear + 1) + "." + year)
+        );
 
         button = findViewById(R.id.set_birthday_button);
         button.setOnClickListener(view -> {

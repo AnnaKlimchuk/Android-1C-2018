@@ -1,7 +1,5 @@
 package com.example.anna.myapplication;
 
-import android.widget.DatePicker;
-
 public class Person {
     private long id;
     private String name;

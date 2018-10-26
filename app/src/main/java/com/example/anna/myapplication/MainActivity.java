@@ -34,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         buttonProfile = findViewById(R.id.open_profile);
         buttonProfile.setOnClickListener(view -> {
-            Intent startActivity = new Intent(MainActivity.this, Main7Activity.class);
+            Intent startActivity = new Intent(MainActivity.this, PersonListActivity.class);
             startActivity(startActivity);
         });
 
         buttonTraining = findViewById(R.id.training_thread);
         buttonTraining.setOnClickListener(view -> {
-            Intent startActivity = new Intent(MainActivity.this, Main3Activity.class);
+            Intent startActivity = new Intent(MainActivity.this, ViewsActivity.class);
             startActivity(startActivity);
         });
 

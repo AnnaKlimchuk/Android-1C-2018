@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Fragment2 extends Fragment {
+public class PersonDetailFragment extends Fragment {
 
     ImageView imageView;
     EditText editText;

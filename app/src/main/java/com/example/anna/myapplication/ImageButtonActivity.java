@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-public class Main2Activity extends AppCompatActivity {
+public class ImageButtonActivity extends AppCompatActivity {
 
     ImageButton imageButton;
     String name;
@@ -15,11 +15,11 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.image_button);
 
         imageButton = findViewById(R.id.moving_button);
         imageButton.setOnClickListener(view -> {
-            Intent startActivity = new Intent(this, Main6Activity.class);
+            Intent startActivity = new Intent(this, CatAsyncTaskActivity.class);
             startActivity(startActivity);
         });
 

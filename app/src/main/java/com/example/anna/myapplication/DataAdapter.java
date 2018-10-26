@@ -1,6 +1,5 @@
 package com.example.anna.myapplication;
 
-import android.content.Context;
 import android.support.v4.util.LongSparseArray;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,15 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     private LongSparseArray<Person> persons;
     private OnClickListener onClickListener;
 
-    DataAdapter(Context context, LongSparseArray<Person> persons, OnClickListener onClickListener) {
-        this.persons = persons;
+    DataAdapter(OnClickListener onClickListener) {
+        this.persons = new LongSparseArray<>();
         this.onClickListener = onClickListener;
     }
 
@@ -33,9 +30,12 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         final Person person = persons.get(position);
         holder.imageView.setImageResource(person.getImageRes());
         holder.nameView.setText(person.getName());
-        holder.itemView.setOnClickListener(v -> {
-            onClickListener.onClick(person.getId());
-        });
+        holder.itemView.setOnClickListener(v -> onClickListener.onClick(person.getId()));
+    }
+
+    public void setPersons(LongSparseArray<Person> persons) {
+        this.persons = persons;
+        notifyDataSetChanged();
     }
 
     @Override
