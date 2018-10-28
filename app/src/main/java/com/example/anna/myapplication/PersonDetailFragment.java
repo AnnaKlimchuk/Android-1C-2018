@@ -15,9 +15,8 @@ import static android.app.Activity.RESULT_OK;
 
 public class PersonDetailFragment extends Fragment {
 
-    ImageView imageView;
-    EditText editText;
-    TextView birthdayTextView, personTextView;
+    private EditText editText;
+    private TextView birthdayTextView;
     private static final String DESCRIPTION = "description";
     private static final String ARG_PERSON_ID = "personId";
     private long personId = 1;
@@ -35,10 +34,10 @@ public class PersonDetailFragment extends Fragment {
         }
         person = PersonStorage.getPersonById(personId);
 
-        imageView = view.findViewById(R.id.person_image);
+        ImageView imageView = view.findViewById(R.id.person_image);
         imageView.setImageResource(person.getImageRes());
 
-        personTextView = view.findViewById(R.id.person_name);
+        TextView personTextView = view.findViewById(R.id.person_name);
         personTextView.setText(person.getName());
 
         birthdayTextView = view.findViewById(R.id.person_birthday);

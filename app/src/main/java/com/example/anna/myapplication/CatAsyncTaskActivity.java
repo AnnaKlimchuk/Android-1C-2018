@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class CatAsyncTaskActivity extends AppCompatActivity {
 
-    TextView infoTextView;
+    private TextView infoTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

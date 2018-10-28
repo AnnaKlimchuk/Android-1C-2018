@@ -8,17 +8,16 @@ import android.content.Intent;
 
 public class ViewsActivity extends AppCompatActivity {
 
-    Button button, backButton;
-    EditText editText;
-    String name;
+    private EditText editText;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.views);
 
-        button = findViewById(R.id.next_move_button);
-        backButton = findViewById(R.id.to_first_activity_button);
+        Button button = findViewById(R.id.next_move_button);
+        Button backButton = findViewById(R.id.to_first_activity_button);
         editText = findViewById(R.id.edited_text);
         name = getString(R.string.person_name);
 

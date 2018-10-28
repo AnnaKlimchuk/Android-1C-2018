@@ -4,7 +4,7 @@ import android.app.Application;
 
 public class MyApplication extends Application {
     @Override
-    public final void onCreate() {
+    public void onCreate() {
         super.onCreate();
         PersonStorage.setInitialData();
     }

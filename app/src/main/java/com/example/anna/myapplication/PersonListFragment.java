@@ -16,8 +16,6 @@ public class PersonListFragment extends Fragment {
 
     private static DataAdapter adapter;
     private LoadDataAsyncTask task;
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,8 +23,8 @@ public class PersonListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.person_list_fragment, container, false);
 
-        recyclerView = view.findViewById(R.id.persons_list);
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView recyclerView = view.findViewById(R.id.persons_list);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new DataAdapter(personId ->
