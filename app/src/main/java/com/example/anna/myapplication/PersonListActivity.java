@@ -6,12 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 public class PersonListActivity extends AppCompatActivity {
 
-    public static final String ARG_PERSON_ID = "personId";
+    private static final String ARG_PERSON_ID = "personId";
     private FragmentManager fragmentManager;
     private Fragment fragment;
     private Fragment new_fragment;
@@ -55,7 +54,6 @@ public class PersonListActivity extends AppCompatActivity {
         personId = -1;
 
         if (findViewById(R.id.fragmentContainer2).getVisibility() == View.VISIBLE) {
-            Log.d("OOOBACK", "onBackPressed: ");
             personId = -1;
             findViewById(R.id.fragmentContainer2).setVisibility(View.GONE);
             findViewById(R.id.fragmentContainer1).setVisibility(View.VISIBLE);
@@ -85,7 +83,7 @@ public class PersonListActivity extends AppCompatActivity {
         outState.putLong(ARG_PERSON_ID, personId);
     }
 
-    public void openFragment2 (long personId_) {
+    protected void openFragment2 (long personId_) {
         personId = personId_;
 
         findViewById(R.id.fragmentContainer2).setVisibility(View.VISIBLE);
@@ -98,6 +96,7 @@ public class PersonListActivity extends AppCompatActivity {
 
         new_fragment = new PersonDetailFragment();
         new_fragment.setArguments(bundle);
+        fragment = fragmentManager.findFragmentById(R.id.fragmentContainer2);
 
         if (fragment != null) {
             fragmentManager.beginTransaction()

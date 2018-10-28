@@ -19,7 +19,7 @@ public class PersonBirthdayActivity extends AppCompatActivity {
         setContentView(R.layout.person_birthday);
 
         Calendar today = Calendar.getInstance();
-        Intent startActivity = new Intent(PersonBirthdayActivity.this, PersonDetailActivity.class);
+        Intent startActivity = new Intent(PersonBirthdayActivity.this, PersonListActivity.class);
 
         datePicker = findViewById(R.id.set_birthday_picker);
         datePicker.init(today.get(Calendar.YEAR),

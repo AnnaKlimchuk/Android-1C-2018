@@ -9,7 +9,7 @@ class CatAsyncTask extends AsyncTask<Void, Void, Void> {
 
     private final TextView infoTextView;
 
-    public CatAsyncTask(TextView infoTextView) {
+    CatAsyncTask(TextView infoTextView) {
         this.infoTextView = infoTextView;
     }
 

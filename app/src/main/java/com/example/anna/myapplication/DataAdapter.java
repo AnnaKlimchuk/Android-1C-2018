@@ -33,7 +33,7 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(v -> onClickListener.onClick(person.getId()));
     }
 
-    public void setPersons(LongSparseArray<Person> persons) {
+    protected void setPersons(LongSparseArray<Person> persons) {
         this.persons = persons;
         notifyDataSetChanged();
     }
@@ -47,9 +47,9 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         void onClick(long personId);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        final ImageView imageView;
-        final TextView nameView;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView imageView;
+        private final TextView nameView;
 
         private ViewHolder(final View itemView){
             super(itemView);

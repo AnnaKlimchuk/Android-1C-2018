@@ -19,9 +19,9 @@ public class PersonDetailFragment extends Fragment {
     EditText editText;
     TextView birthdayTextView, personTextView;
     private static final String DESCRIPTION = "description";
-    public static final String ARG_PERSON_ID = "personId";
-    long personId = 1;
-    Person person;
+    private static final String ARG_PERSON_ID = "personId";
+    private long personId = 1;
+    private Person person;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +48,7 @@ public class PersonDetailFragment extends Fragment {
             startActivityForResult(startActivity, 1);
         });
 
-        // TODO не сохранчется ?
+        // TODO не сохраняется ?
         editText = view.findViewById(R.id.person_description);
         editText.setText(person.getNote());
         editText.setOnKeyListener((v, keyCode, event) -> {

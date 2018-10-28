@@ -7,7 +7,7 @@ public class Person {
     private int imageRes;
     private String birthday;
 
-    public Person(final long id, final String name, final String note, final int imageRes, final String birthday){
+    Person(final long id, final String name, final String note, final int imageRes, final String birthday){
 
         this.id = id;
         this.name = name;

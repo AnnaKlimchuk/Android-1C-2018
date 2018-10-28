@@ -14,8 +14,10 @@ import java.util.concurrent.TimeUnit;
 
 public class PersonListFragment extends Fragment {
 
-    private DataAdapter adapter;
+    private static DataAdapter adapter;
     private LoadDataAsyncTask task;
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,14 +25,13 @@ public class PersonListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.person_list_fragment, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.persons_list);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView = view.findViewById(R.id.persons_list);
+        layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new DataAdapter(personId ->
                 ((PersonListActivity) getActivity()).openFragment2(personId));
         recyclerView.setAdapter(adapter);
-
         loadPersons();
 
         return view;
@@ -47,7 +48,7 @@ public class PersonListFragment extends Fragment {
         task.execute();
     }
 
-    class LoadDataAsyncTask extends AsyncTask<Void, Void, LongSparseArray<Person>> {
+    static class LoadDataAsyncTask extends AsyncTask<Void, Void, LongSparseArray<Person>> {
         @Override
         protected LongSparseArray<Person> doInBackground(Void... voids) {
             try {
