@@ -10,10 +10,10 @@ import android.view.View;
 
 public class PersonListActivity extends AppCompatActivity {
 
-    private static final String ARG_PERSON_ID = "personId";
+    public static final String ARG_PERSON_ID = "personId";
     private FragmentManager fragmentManager;
     private Fragment fragment;
-    private Fragment new_fragment;
+    private Fragment newFragment;
     private long personId = -1;
 
     @Override
@@ -29,16 +29,16 @@ public class PersonListActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         fragment = fragmentManager.findFragmentById(R.id.fragmentContainer1);
-        new_fragment = new PersonListFragment();
+        newFragment = new PersonListFragment();
 
         if (fragment != null) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer1, new_fragment)
+                    .replace(R.id.fragmentContainer1, newFragment)
                     .commit();
         } else {
             fragmentManager.beginTransaction()
                     .addToBackStack(null)
-                    .add(R.id.fragmentContainer1, new_fragment)
+                    .add(R.id.fragmentContainer1, newFragment)
                     .commit();
         }
 
@@ -59,16 +59,16 @@ public class PersonListActivity extends AppCompatActivity {
             findViewById(R.id.fragmentContainer1).setVisibility(View.VISIBLE);
 
             fragment = fragmentManager.findFragmentById(R.id.fragmentContainer1);
-            new_fragment = new PersonListFragment();
+            newFragment = new PersonListFragment();
 
             if (fragment != null) {
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainer1, new_fragment)
+                        .replace(R.id.fragmentContainer1, newFragment)
                         .commit();
             } else {
                 fragmentManager.beginTransaction()
                         .addToBackStack(null)
-                        .add(R.id.fragmentContainer1, new_fragment)
+                        .add(R.id.fragmentContainer1, newFragment)
                         .commit();
             }
         } else {
@@ -83,7 +83,7 @@ public class PersonListActivity extends AppCompatActivity {
         outState.putLong(ARG_PERSON_ID, personId);
     }
 
-    protected void openFragment2 (long personId_) {
+    public void openFragment2 (long personId_) {
         personId = personId_;
 
         findViewById(R.id.fragmentContainer2).setVisibility(View.VISIBLE);
@@ -94,18 +94,18 @@ public class PersonListActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putLong(ARG_PERSON_ID, personId_);
 
-        new_fragment = new PersonDetailFragment();
-        new_fragment.setArguments(bundle);
         fragment = fragmentManager.findFragmentById(R.id.fragmentContainer2);
+        newFragment = new PersonDetailFragment();
+        newFragment.setArguments(bundle);
 
         if (fragment != null) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer2, new_fragment)
+                    .replace(R.id.fragmentContainer2, newFragment)
                     .commit();
         } else {
             fragmentManager.beginTransaction()
                     .addToBackStack(null)
-                    .add(R.id.fragmentContainer2, new_fragment)
+                    .add(R.id.fragmentContainer2, newFragment)
                     .commit();
         }
     }

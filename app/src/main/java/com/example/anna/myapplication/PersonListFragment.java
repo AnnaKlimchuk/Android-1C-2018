@@ -25,6 +25,7 @@ public class PersonListFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.persons_list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new DataAdapter(personId ->
