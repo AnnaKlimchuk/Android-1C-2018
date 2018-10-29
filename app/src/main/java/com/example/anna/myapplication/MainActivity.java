@@ -8,7 +8,6 @@ import android.net.Uri;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button buttonEmail, buttonProfile, buttonTraining;
     private static final String EMAIL = "anna_klm@mail.ru";
     private static final String EMAIL_SUBJECT = "Hello";
     private static final String EMAIL_TEXT = "Welcome letter from %s";
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonEmail = findViewById(R.id.send_email);
+        Button buttonEmail = findViewById(R.id.send_email);
         buttonEmail.setOnClickListener(view -> {
             Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
 
@@ -32,18 +31,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonProfile = findViewById(R.id.open_profile);
+        Button buttonProfile = findViewById(R.id.open_profile);
         buttonProfile.setOnClickListener(view -> {
-            Intent startActivity = new Intent(MainActivity.this, Main7Activity.class);
+            Intent startActivity = new Intent(MainActivity.this, PersonListActivity.class);
             startActivity(startActivity);
         });
 
-        buttonTraining = findViewById(R.id.training_thread);
+        Button buttonTraining = findViewById(R.id.training_thread);
         buttonTraining.setOnClickListener(view -> {
-            Intent startActivity = new Intent(MainActivity.this, Main3Activity.class);
+            Intent startActivity = new Intent(MainActivity.this, ViewsActivity.class);
             startActivity(startActivity);
         });
-
     }
-
 }

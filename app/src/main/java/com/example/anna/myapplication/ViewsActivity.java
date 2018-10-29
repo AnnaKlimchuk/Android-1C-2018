@@ -6,24 +6,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
 
-public class Main3Activity extends AppCompatActivity {
+public class ViewsActivity extends AppCompatActivity {
 
-    Button button, backButton;
-    EditText editText;
-    String name;
+    private EditText editText;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.views);
 
-        button = findViewById(R.id.next_move_button);
-        backButton = findViewById(R.id.to_first_activity_button);
+        Button button = findViewById(R.id.next_move_button);
+        Button backButton = findViewById(R.id.to_first_activity_button);
         editText = findViewById(R.id.edited_text);
         name = getString(R.string.person_name);
 
         button.setOnClickListener(view -> {
-            Intent startActivity = new Intent(Main3Activity.this, Main2Activity.class);
+            Intent startActivity = new Intent(ViewsActivity.this, ImageButtonActivity.class);
             startActivity.putExtra(name, editText.getText().toString());
             startActivity(startActivity);
         });

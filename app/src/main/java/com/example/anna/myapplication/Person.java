@@ -1,7 +1,5 @@
 package com.example.anna.myapplication;
 
-import android.widget.DatePicker;
-
 public class Person {
     private long id;
     private String name;
@@ -9,8 +7,7 @@ public class Person {
     private int imageRes;
     private String birthday;
 
-    public Person(final long id, final String name, final String note, final int imageRes, final String birthday){
-
+    Person(final long id, final String name, final String note, final int imageRes, final String birthday){
         this.id = id;
         this.name = name;
         this.note = note;
@@ -35,7 +32,6 @@ public class Person {
     public int getImageRes() {
         return imageRes;
     }
-
     public void setImageRes(int imageRes) {
         this.imageRes = imageRes;
     }
@@ -43,7 +39,6 @@ public class Person {
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -51,7 +46,6 @@ public class Person {
     public String getBirthday() {
         return birthday;
     }
-
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
