@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ImageButtonActivity">
+    tools:context=".presentation.ImageButtonActivity">
 
     <ImageButton
         android:id="@+id/moving_button"
@@ -18,5 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/ic_launcher_background" />
+
+    <Button
+        android:id="@+id/to_first_activity_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/to_first_activity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/colorPurple" />
 
 </android.support.constraint.ConstraintLayout>

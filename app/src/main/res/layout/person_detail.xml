@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".PersonDetailActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,12 +16,11 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/person_image"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:src="@drawable/zootopia_fox"
-                android:scaleType="centerInside"
+                app:actualImageScaleType="centerInside"
                 android:contentDescription="@string/person_image"
                 android:background="@color/colorGreen"
                 android:layout_gravity="center_horizontal"
@@ -32,7 +30,6 @@
                 android:id="@+id/person_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/person_name"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/colorPurple" />
@@ -41,7 +38,6 @@
                 android:id="@+id/person_birthday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/person_birthday"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/colorBlue" />

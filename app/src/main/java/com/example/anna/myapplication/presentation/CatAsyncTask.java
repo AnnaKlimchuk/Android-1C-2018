@@ -1,15 +1,15 @@
-package com.example.anna.myapplication;
+package com.example.anna.myapplication.presentation;
 
 import android.os.AsyncTask;
 import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
 
-class CatAsyncTask extends AsyncTask<Void, Void, Void> {
+public class CatAsyncTask extends AsyncTask<Void, Void, Void> {
 
     private final TextView infoTextView;
 
-    CatAsyncTask(TextView infoTextView) {
+    public CatAsyncTask(TextView infoTextView) {
         this.infoTextView = infoTextView;
     }
 
