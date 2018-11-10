@@ -13,4 +13,7 @@
     <string name="person_birthday">press to set birthday</string>
     <string name="OK">OK</string>
     <string name="person_image">This is the picture of the person</string>
+    <string name="additional_thread">try everything</string>
+    <string name="cat_start">Start the cat</string>
+    <string name="next">Next screen</string>
 </resources>

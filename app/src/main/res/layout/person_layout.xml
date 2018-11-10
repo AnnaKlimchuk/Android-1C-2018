@@ -11,11 +11,12 @@
     android:layout_marginTop="8dp"
     android:background="@drawable/view_background" >
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/person_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:contentDescription="@string/person_image" />
+        android:contentDescription="@string/person_image"
+        app:actualImageScaleType="centerInside"/>
 
     <TextView
         android:id="@+id/person_name"

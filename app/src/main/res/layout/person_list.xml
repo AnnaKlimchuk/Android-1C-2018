@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:baselineAligned="false"
-    tools:context=".PersonListActivity">
+    tools:context=".presentation.PersonListActivity">
 
     <FrameLayout
         android:id="@+id/fragmentContainer1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-
     </FrameLayout>
 
     <FrameLayout
@@ -22,7 +21,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:visibility="gone">
-
     </FrameLayout>
 
 </LinearLayout>

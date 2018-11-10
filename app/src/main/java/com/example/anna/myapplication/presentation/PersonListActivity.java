@@ -1,4 +1,4 @@
-package com.example.anna.myapplication;
+package com.example.anna.myapplication.presentation;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -6,7 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
+import com.example.anna.myapplication.R;
 
 public class PersonListActivity extends AppCompatActivity {
 
@@ -31,11 +34,7 @@ public class PersonListActivity extends AppCompatActivity {
         fragment = fragmentManager.findFragmentById(R.id.fragmentContainer1);
         newFragment = new PersonListFragment();
 
-        if (fragment != null) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer1, newFragment)
-                    .commit();
-        } else {
+        if (fragment == null) {
             fragmentManager.beginTransaction()
                     .addToBackStack(null)
                     .add(R.id.fragmentContainer1, newFragment)
@@ -54,23 +53,19 @@ public class PersonListActivity extends AppCompatActivity {
         personId = -1;
 
         if (findViewById(R.id.fragmentContainer2).getVisibility() == View.VISIBLE) {
-            personId = -1;
             findViewById(R.id.fragmentContainer2).setVisibility(View.GONE);
-            findViewById(R.id.fragmentContainer1).setVisibility(View.VISIBLE);
 
             fragment = fragmentManager.findFragmentById(R.id.fragmentContainer1);
             newFragment = new PersonListFragment();
 
-            if (fragment != null) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainer1, newFragment)
-                        .commit();
-            } else {
+            if (fragment == null) {
                 fragmentManager.beginTransaction()
                         .addToBackStack(null)
                         .add(R.id.fragmentContainer1, newFragment)
                         .commit();
             }
+
+            findViewById(R.id.fragmentContainer1).setVisibility(View.VISIBLE);
         } else {
             Intent startActivity = new Intent(PersonListActivity.this, MainActivity.class);
             startActivity(startActivity);
@@ -83,10 +78,9 @@ public class PersonListActivity extends AppCompatActivity {
         outState.putLong(ARG_PERSON_ID, personId);
     }
 
-    public void openFragment2 (long personId_) {
+    public void changeFragment2(long personId_) {
         personId = personId_;
 
-        findViewById(R.id.fragmentContainer2).setVisibility(View.VISIBLE);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             findViewById(R.id.fragmentContainer1).setVisibility(View.GONE);
         }
@@ -102,11 +96,40 @@ public class PersonListActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer2, newFragment)
                     .commit();
+            // TODO fragment отображается не сразу
+            // сначала создается пустое activity
+            // мб не пришили результаты asynktask?
         } else {
             fragmentManager.beginTransaction()
                     .addToBackStack(null)
                     .add(R.id.fragmentContainer2, newFragment)
                     .commit();
         }
+
+        findViewById(R.id.fragmentContainer2).setVisibility(View.VISIBLE);
+    }
+
+    public void openFragment2 (long personId_) {
+        personId = personId_;
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            findViewById(R.id.fragmentContainer1).setVisibility(View.GONE);
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putLong(ARG_PERSON_ID, personId_);
+
+        fragment = fragmentManager.findFragmentById(R.id.fragmentContainer2);
+        newFragment = new PersonDetailFragment();
+        newFragment.setArguments(bundle);
+
+        if (fragment == null) {
+            fragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .add(R.id.fragmentContainer2, newFragment)
+                    .commit();
+        }
+
+        findViewById(R.id.fragmentContainer2).setVisibility(View.VISIBLE);
     }
 }
