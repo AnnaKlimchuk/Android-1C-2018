@@ -1,6 +1,5 @@
 package com.example.anna.myapplication.presentation;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -14,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.anna.myapplication.R;
-import com.example.anna.myapplication.data.MySQLiteOpenHelper;
 import com.example.anna.myapplication.domain.Person;
 import com.facebook.drawee.view.SimpleDraweeView;
 import static android.app.Activity.RESULT_OK;
@@ -94,7 +92,7 @@ public class PersonDetailFragment extends Fragment {
 
             // SQLite
                     /* ContentValues updatedValues = new ContentValues();
-                    updatedValues.put(MySQLiteOpenHelper.Columns.BIRTHDAY, birthday);
+                    updatedValues.put(AppSQLiteOpenHelper.Columns.BIRTHDAY, birthday);
                     MyApplication.personRepository.update(
                             personId,
                             updatedValues);

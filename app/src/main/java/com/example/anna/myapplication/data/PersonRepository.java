@@ -7,37 +7,31 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.ReentrantLock;
-import android.content.Context;
 
-import com.example.anna.myapplication.data.MySQLiteOpenHelper;
 import com.example.anna.myapplication.domain.Person;
 
 public class PersonRepository {
 
-    private final MySQLiteOpenHelper SQLiteOpenHelper;
-    private SQLiteDatabase SQLitedatabase;
-    private int databaseOpenCloseBalance = 0;
-    private ReentrantLock reentrantLock = new ReentrantLock();
+    private DatabaseHolder databaseHolder;
 
-    public PersonRepository(@NonNull final Context context){
-        SQLiteOpenHelper = new MySQLiteOpenHelper(context, 1);
+    public PersonRepository(@NonNull final DatabaseHolder databaseHolder) {
+        this.databaseHolder = databaseHolder;
     }
 
     public void create(@NonNull final Person person) {
         try {
-            SQLiteDatabase database = openDatabase();
+            SQLiteDatabase database = databaseHolder.openDatabase();
 
             ContentValues contentValues = new ContentValues();
-            contentValues.put(MySQLiteOpenHelper.Columns.NAME, person.getName());
-            contentValues.put(MySQLiteOpenHelper.Columns.NOTE, person.getNote());
-            contentValues.put(MySQLiteOpenHelper.Columns.IMAGE_RES, person.getImageRes());
-            contentValues.put(MySQLiteOpenHelper.Columns.IMAGE_LINK, person.getImageLink());
-            contentValues.put(MySQLiteOpenHelper.Columns.BIRTHDAY, person.getBirthday());
+            contentValues.put(PersonContract.NAME, person.getName());
+            contentValues.put(PersonContract.NOTE, person.getNote());
+            contentValues.put(PersonContract.IMAGE_RES, person.getImageRes());
+            contentValues.put(PersonContract.IMAGE_LINK, person.getImageLink());
+            contentValues.put(PersonContract.BIRTHDAY, person.getBirthday());
 
-            database.insert(MySQLiteOpenHelper.TABLE_NAME, null, contentValues);
+            database.insert(PersonContract.TABLE_NAME, null, contentValues);
         } finally {
-            closeDatabase();
+            databaseHolder.closeDatabase();
         }
     }
 
@@ -45,17 +39,17 @@ public class PersonRepository {
         Person person = null;
         Cursor cursor = null;
         try {
-            SQLiteDatabase database = openDatabase();
+            SQLiteDatabase database = databaseHolder.openDatabase();
 
             cursor = database.query(
-                    MySQLiteOpenHelper.TABLE_NAME,
+                    PersonContract.TABLE_NAME,
                     new String[]{
-                            MySQLiteOpenHelper.Columns._ID,
-                            MySQLiteOpenHelper.Columns.NAME,
-                            MySQLiteOpenHelper.Columns.NOTE,
-                            MySQLiteOpenHelper.Columns.IMAGE_RES,
-                            MySQLiteOpenHelper.Columns.IMAGE_LINK,
-                            MySQLiteOpenHelper.Columns.BIRTHDAY},
+                            PersonContract._ID,
+                            PersonContract.NAME,
+                            PersonContract.NOTE,
+                            PersonContract.IMAGE_RES,
+                            PersonContract.IMAGE_LINK,
+                            PersonContract.BIRTHDAY},
                     "_id = ?",
                     new String[] {personId + ""},
                     null,
@@ -66,18 +60,18 @@ public class PersonRepository {
             while (cursor.moveToNext()) {
                 person = new Person();
 
-                person.setId(cursor.getLong(cursor.getColumnIndex(MySQLiteOpenHelper.Columns._ID)));
-                person.setName(cursor.getString(cursor.getColumnIndex(MySQLiteOpenHelper.Columns.NAME)));
-                person.setNote(cursor.getString(cursor.getColumnIndex(MySQLiteOpenHelper.Columns.NOTE)));
-                person.setImageRes(cursor.getInt(cursor.getColumnIndex(MySQLiteOpenHelper.Columns.IMAGE_RES)));
-                person.setImageLink(cursor.getString(cursor.getColumnIndex(MySQLiteOpenHelper.Columns.IMAGE_LINK)));
-                person.setBirthday(cursor.getString(cursor.getColumnIndex(MySQLiteOpenHelper.Columns.BIRTHDAY)));
+                person.setId(cursor.getLong(cursor.getColumnIndex(PersonContract._ID)));
+                person.setName(cursor.getString(cursor.getColumnIndex(PersonContract.NAME)));
+                person.setNote(cursor.getString(cursor.getColumnIndex(PersonContract.NOTE)));
+                person.setImageRes(cursor.getInt(cursor.getColumnIndex(PersonContract.IMAGE_RES)));
+                person.setImageLink(cursor.getString(cursor.getColumnIndex(PersonContract.IMAGE_LINK)));
+                person.setBirthday(cursor.getString(cursor.getColumnIndex(PersonContract.BIRTHDAY)));
             }
         } finally {
             if (cursor != null) {
                 cursor.close();
             }
-            closeDatabase();
+            databaseHolder.closeDatabase();
         }
 
         return person;
@@ -87,17 +81,17 @@ public class PersonRepository {
         List<Person> personList = new ArrayList<>();
         Cursor cursor = null;
         try {
-            SQLiteDatabase database = openDatabase();
+            SQLiteDatabase database = databaseHolder.openDatabase();
             
             cursor = database.query(
-                    MySQLiteOpenHelper.TABLE_NAME,
+                    PersonContract.TABLE_NAME,
                     new String[]{
-                            MySQLiteOpenHelper.Columns._ID,
-                            MySQLiteOpenHelper.Columns.NAME,
-                            MySQLiteOpenHelper.Columns.NOTE,
-                            MySQLiteOpenHelper.Columns.IMAGE_RES,
-                            MySQLiteOpenHelper.Columns.IMAGE_LINK,
-                            MySQLiteOpenHelper.Columns.BIRTHDAY},
+                            PersonContract._ID,
+                            PersonContract.NAME,
+                            PersonContract.NOTE,
+                            PersonContract.IMAGE_RES,
+                            PersonContract.IMAGE_LINK,
+                            PersonContract.BIRTHDAY},
                     null,
                     null,
                     null,
@@ -108,12 +102,12 @@ public class PersonRepository {
             while (cursor.moveToNext()) {
                 Person person = new Person();
                 
-                person.setId(cursor.getLong(cursor.getColumnIndex(MySQLiteOpenHelper.Columns._ID)));
-                person.setName(cursor.getString(cursor.getColumnIndex(MySQLiteOpenHelper.Columns.NAME)));
-                person.setNote(cursor.getString(cursor.getColumnIndex(MySQLiteOpenHelper.Columns.NOTE)));
-                person.setImageRes(cursor.getInt(cursor.getColumnIndex(MySQLiteOpenHelper.Columns.IMAGE_RES)));
-                person.setImageLink(cursor.getString(cursor.getColumnIndex(MySQLiteOpenHelper.Columns.IMAGE_LINK)));
-                person.setBirthday(cursor.getString(cursor.getColumnIndex(MySQLiteOpenHelper.Columns.BIRTHDAY)));
+                person.setId(cursor.getLong(cursor.getColumnIndex(PersonContract._ID)));
+                person.setName(cursor.getString(cursor.getColumnIndex(PersonContract.NAME)));
+                person.setNote(cursor.getString(cursor.getColumnIndex(PersonContract.NOTE)));
+                person.setImageRes(cursor.getInt(cursor.getColumnIndex(PersonContract.IMAGE_RES)));
+                person.setImageLink(cursor.getString(cursor.getColumnIndex(PersonContract.IMAGE_LINK)));
+                person.setBirthday(cursor.getString(cursor.getColumnIndex(PersonContract.BIRTHDAY)));
 
                 personList.add(person);
             }
@@ -121,7 +115,7 @@ public class PersonRepository {
             if (cursor != null) {
                 cursor.close();
             }
-            closeDatabase();
+            databaseHolder.closeDatabase();
         }
 
         return personList;
@@ -129,40 +123,11 @@ public class PersonRepository {
 
     public void update(long personId, ContentValues updatedValues) {
         try {
-            SQLiteDatabase database = openDatabase();
+            SQLiteDatabase database = databaseHolder.openDatabase();
 
-            database.update(MySQLiteOpenHelper.TABLE_NAME, updatedValues, "_id=?", new String[]{String.valueOf(personId)});
+            database.update(PersonContract.TABLE_NAME, updatedValues, "_id=?", new String[]{String.valueOf(personId)});
         } finally {
-            closeDatabase();
-        }
-    }
-
-    private SQLiteDatabase openDatabase() {
-        try {
-            reentrantLock.lock();
-            if (databaseOpenCloseBalance == 0) {
-                SQLitedatabase = SQLiteOpenHelper.getWritableDatabase();
-            }
-
-            ++databaseOpenCloseBalance;
-
-            return SQLitedatabase;
-        } finally {
-            reentrantLock.unlock();
-        }
-    }
-
-    private void closeDatabase() {
-        try {
-            reentrantLock.lock();
-            --databaseOpenCloseBalance;
-
-            if (databaseOpenCloseBalance == 0) {
-                SQLitedatabase.close();
-                SQLitedatabase = null;
-            }
-        } finally {
-            reentrantLock.unlock();
+            databaseHolder.closeDatabase();
         }
     }
 }

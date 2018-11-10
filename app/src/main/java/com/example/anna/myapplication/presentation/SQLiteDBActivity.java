@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.anna.myapplication.R;
 import com.example.anna.myapplication.domain.Person;
 
+import java.util.List;
 import java.util.Random;
 
 public class SQLiteDBActivity extends AppCompatActivity {
@@ -76,8 +77,11 @@ public class SQLiteDBActivity extends AppCompatActivity {
             person.setImageRes(IMAGES_RES[number]);
 
             MyApplication.getRepository().create(person);
-            Pair<String, Integer> pair = new Pair<String, Integer>(person.toString() + " was created.\nNow there are " + MyApplication.getRepository().loadAll().size() + " persons", person.getImageRes());
-            return pair;
+            return new Pair<>(
+                    person.toString()
+                    + " was created.\nNow there are "
+                    + MyApplication.getRepository().loadAll().size()
+                    + " persons", person.getImageRes());
         }
 
         @Override
@@ -95,7 +99,8 @@ public class SQLiteDBActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(final Void... voids) {
-            return "There are " + MyApplication.getRepository().loadAll().size() + " persons:\n" + MyApplication.getRepository().loadAll().toString();
+            List<Person> personList =  MyApplication.getRepository().loadAll();
+            return "There are " + personList.size() + " persons:\n" + personList.toString();
         }
 
         @Override

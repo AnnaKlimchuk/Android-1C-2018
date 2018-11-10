@@ -33,16 +33,16 @@ public class ParseDataFromInternetAsyncTask extends AsyncTask<Void, Void, Void> 
             urlConnection.connect();
 
             InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer stringBuffer = new StringBuffer();
+            StringBuilder stringBuilder = new StringBuilder();
 
             reader = new BufferedReader(new InputStreamReader(inputStream));
 
             String line;
             while ((line = reader.readLine()) != null) {
-                stringBuffer.append(line);
+                stringBuilder.append(line);
             }
 
-            resultJson = stringBuffer.toString();
+            resultJson = stringBuilder.toString();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -5,7 +5,8 @@ import android.arch.persistence.room.RoomDatabase;
 
 import com.example.anna.myapplication.domain.Person;
 
-@Database(entities = {Person.class}, version = 1)
+// TODO exportSchema
+@Database(entities = {Person.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract PersonDao PersonDao();
 }

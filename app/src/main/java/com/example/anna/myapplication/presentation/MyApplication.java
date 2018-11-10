@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.persistence.room.Room;
 
 import com.example.anna.myapplication.data.AppDatabase;
+import com.example.anna.myapplication.data.DatabaseHolder;
 import com.example.anna.myapplication.data.PersonDao;
 import com.example.anna.myapplication.data.PersonRepository;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -12,11 +13,11 @@ public class MyApplication extends Application {
 
     private static AppDatabase database;
     private static PersonRepository personRepository;
+    private static DatabaseHolder databaseHolder;
 
     public static PersonDao getPersonDao(){
         return database.PersonDao();
     }
-
     public static PersonRepository getRepository(){
         return personRepository;
     }
@@ -28,7 +29,8 @@ public class MyApplication extends Application {
         Fresco.initialize(this);
 
         // SQLite
-        personRepository = new PersonRepository(this);
+        databaseHolder = new DatabaseHolder(this);
+        personRepository = new PersonRepository(databaseHolder);
         // ROOM
         database = Room.databaseBuilder(this, AppDatabase.class, "database")
                 .build();
