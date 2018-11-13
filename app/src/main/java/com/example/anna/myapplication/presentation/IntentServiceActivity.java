@@ -11,29 +11,31 @@ import java.io.FileInputStream;
 
 public class IntentServiceActivity extends AppCompatActivity {
 
-    private TextView mInfoTextView;
-    private Button mButton;
+    private TextView DatabaseTextView;
+    private Button DatabaseLoadButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intent_service);
 
-        mInfoTextView = (TextView) findViewById(R.id.textView);
+        DatabaseTextView = (TextView) findViewById(R.id.textView);
 
-        mButton = (Button) findViewById(R.id.loadDatabaseButton);
-        mButton.setOnClickListener(view -> {
+        DatabaseLoadButton = (Button) findViewById(R.id.loadDatabaseButton);
+        DatabaseLoadButton.setOnClickListener(view -> {
             StringBuilder stringBuilder = new StringBuilder();
             try{
-                // todo catch
                 FileInputStream fstream = openFileInput(MyApplication.getFileName());
                 int i;
                 while ((i = fstream.read())!= -1){
                     stringBuilder.append((char)i);
                 }
                 fstream.close();
-            }catch (Exception e){}
-            mInfoTextView.setText(stringBuilder.toString());
+                DatabaseTextView.setText(stringBuilder.toString());
+            }catch (Exception e){
+                DatabaseTextView.setText(getResources().getString(R.string.error_load_database));
+            }
+
         });
     }
 }

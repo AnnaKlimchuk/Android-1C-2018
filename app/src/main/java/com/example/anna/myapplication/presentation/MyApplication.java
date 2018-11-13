@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 
-import com.example.anna.myapplication.LoadDatabaseIntentService;
+import com.example.anna.myapplication.data.LoadDatabaseIntentService;
 import com.example.anna.myapplication.data.AppDatabase;
 import com.example.anna.myapplication.data.DatabaseHolder;
 import com.example.anna.myapplication.data.PersonDao;
@@ -51,7 +51,7 @@ public class MyApplication extends Application {
 
         setInitialData();
 
-        // Запускаем свой IntentService
+        // Запускаем IntentService
         Intent intentMyIntentService = new Intent(this, LoadDatabaseIntentService.class);
         fileName = getFileNameOnCurrentTime();
         startService(intentMyIntentService.putExtra("fileName", fileName));

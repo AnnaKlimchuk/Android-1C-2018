@@ -31,7 +31,7 @@
         <activity android:name=".presentation.RoomDB" />
 
         <service
-            android:name=".LoadDatabaseIntentService"
+            android:name=".data.LoadDatabaseIntentService"
             android:exported="false" />
 
         <activity android:name=".presentation.IntentServiceActivity"></activity>

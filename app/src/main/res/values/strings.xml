@@ -17,4 +17,5 @@
     <string name="cat_start">Start the cat</string>
     <string name="next">Next screen</string>
     <string name="load_database">Load Database</string>
+    <string name="error_load_database">ERROR happened during database showing</string>
 </resources>
