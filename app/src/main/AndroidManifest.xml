@@ -3,6 +3,8 @@
     package="com.example.anna.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".presentation.MyApplication"
@@ -26,7 +28,13 @@
         <activity android:name=".presentation.CatAsyncTaskActivity" />
         <activity android:name=".presentation.FrescoImageActivity" />
         <activity android:name=".presentation.SQLiteDBActivity" />
-        <activity android:name=".presentation.RoomDB"></activity>
+        <activity android:name=".presentation.RoomDB" />
+
+        <service
+            android:name=".LoadDatabaseIntentService"
+            android:exported="false" />
+
+        <activity android:name=".presentation.IntentServiceActivity"></activity>
     </application>
 
 </manifest>

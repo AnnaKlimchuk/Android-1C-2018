@@ -16,4 +16,5 @@
     <string name="additional_thread">try everything</string>
     <string name="cat_start">Start the cat</string>
     <string name="next">Next screen</string>
+    <string name="load_database">Load Database</string>
 </resources>
