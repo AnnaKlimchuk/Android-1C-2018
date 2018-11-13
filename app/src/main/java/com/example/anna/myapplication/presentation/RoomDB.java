@@ -37,8 +37,8 @@ public class RoomDB extends AppCompatActivity {
 
         nextButton = findViewById(R.id.nextScreenButton);
         nextButton.setOnClickListener(view -> {
-            // Intent startActivity = new Intent(this, RoomDB.class);
-            //startActivity(startActivity);
+            Intent startActivity = new Intent(this, IntentServiceActivity.class);
+            startActivity(startActivity);
         });
 
         backButton = findViewById(R.id.to_first_activity_button);
