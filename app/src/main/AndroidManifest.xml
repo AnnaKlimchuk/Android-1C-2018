@@ -34,7 +34,8 @@
             android:name=".data.LoadDatabaseIntentService"
             android:exported="false" />
 
-        <activity android:name=".presentation.IntentServiceActivity"></activity>
+        <activity android:name=".presentation.IntentServiceActivity" />
+        <activity android:name=".presentation.TouchActivity"></activity>
     </application>
 
 </manifest>

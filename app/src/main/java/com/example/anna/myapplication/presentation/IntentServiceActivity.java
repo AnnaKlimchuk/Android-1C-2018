@@ -1,5 +1,6 @@
 package com.example.anna.myapplication.presentation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -12,7 +13,8 @@ import java.io.FileInputStream;
 public class IntentServiceActivity extends AppCompatActivity {
 
     private TextView DatabaseTextView;
-    private Button DatabaseLoadButton;
+    private Button DatabaseLoadButton, nextButton, backButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,18 @@ public class IntentServiceActivity extends AppCompatActivity {
                 DatabaseTextView.setText(getResources().getString(R.string.error_load_database));
             }
 
+        });
+
+        nextButton = findViewById(R.id.nextScreenButton);
+        nextButton.setOnClickListener(view -> {
+            Intent startActivity = new Intent(this, TouchActivity.class);
+            startActivity(startActivity);
+        });
+
+        backButton = findViewById(R.id.to_first_activity_button);
+        backButton.setOnClickListener(view -> {
+            Intent startActivity = new Intent(this, MainActivity.class);
+            startActivity(startActivity);
         });
     }
 }

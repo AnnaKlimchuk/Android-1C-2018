@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.anna.myapplication.R;
@@ -18,6 +18,7 @@ public class PersonListActivity extends AppCompatActivity {
     private Fragment fragment;
     private Fragment newFragment;
     private long personId = -1;
+    private float downX, downY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,5 +132,46 @@ public class PersonListActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.fragmentContainer2).setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                downX = event.getX();
+                downY = event.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                float upX = event.getX();
+                float upY = event.getY();
+
+                float deltaX = downX - upX;
+                float deltaY = downY - upY;
+                if ((Math.abs(deltaY) > Math.abs(deltaX)) && (deltaY < 0)) {
+
+                    personId = -1;
+
+                    if (findViewById(R.id.fragmentContainer2).getVisibility() == View.VISIBLE) {
+                        findViewById(R.id.fragmentContainer2).setVisibility(View.GONE);
+
+                        fragment = fragmentManager.findFragmentById(R.id.fragmentContainer1);
+                        newFragment = new PersonListFragment();
+
+                        if (fragment == null) {
+                            fragmentManager.beginTransaction()
+                                    .addToBackStack(null)
+                                    .add(R.id.fragmentContainer1, newFragment)
+                                    .commit();
+                        }
+
+                        findViewById(R.id.fragmentContainer1).setVisibility(View.VISIBLE);
+                    }
+                }
+                break;
+        }
+        return true;
     }
 }
