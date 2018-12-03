@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 
+
+def singingProperties = new Properties()
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -10,15 +13,38 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    signingConfigs {
+        debug {
+            singingProperties.load(new FileInputStream(file("..\\keystores\\debug.properties")))
+            keyAlias singingProperties.debugSignKeyAlias
+            keyPassword singingProperties.debugSignKeyPassword
+            storeFile file(singingProperties.debugStoreFilePath)
+            storePassword singingProperties.debugStorePassword
+
+        }
+        release {
+            singingProperties.load(new FileInputStream(file("..\\keystores\\release.properties")))
+            keyAlias singingProperties.releaseSignKeyAlias
+            keyPassword singingProperties.releaseSignKeyPassword
+            storeFile file(singingProperties.releaseStoreFilePath)
+            storePassword singingProperties.releaseStorePassword
+
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.debug
+        }
     }
 }
 
