@@ -5,8 +5,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GestureDetectorCompat;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -17,7 +20,9 @@ import com.example.anna.myapplication.domain.Person;
 import com.facebook.drawee.view.SimpleDraweeView;
 import static android.app.Activity.RESULT_OK;
 
-public class PersonDetailFragment extends Fragment {
+public class PersonDetailFragment extends Fragment implements
+        GestureDetector.OnGestureListener,
+        GestureDetector.OnDoubleTapListener{
 
     private static EditText editText;
     private SimpleDraweeView imageView;
@@ -25,6 +30,7 @@ public class PersonDetailFragment extends Fragment {
     private static final String ARG_DESCRIPTION = "description";
     private static final String ARG_PERSON_ID = "personId";
     private long personId = -1;
+    private GestureDetectorCompat gestureDetectorCompat;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +67,15 @@ public class PersonDetailFragment extends Fragment {
         if (savedInstanceState != null) {
             editText.setText(savedInstanceState.getString(ARG_DESCRIPTION));
         }
+
+        gestureDetectorCompat = new GestureDetectorCompat(getContext(),this);
+        gestureDetectorCompat.setOnDoubleTapListener(this);
+
+        view.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetectorCompat.onTouchEvent(event);
+            }
+        });
         return view;
     }
 
@@ -91,12 +106,12 @@ public class PersonDetailFragment extends Fragment {
             MyApplication.getPersonDao().update(person);
 
             // SQLite
-                    /* ContentValues updatedValues = new ContentValues();
-                    updatedValues.put(AppSQLiteOpenHelper.Columns.BIRTHDAY, birthday);
-                    MyApplication.personRepository.update(
-                            personId,
-                            updatedValues);
-                    */
+            /* ContentValues updatedValues = new ContentValues();
+            updatedValues.put(AppSQLiteOpenHelper.Columns.BIRTHDAY, birthday);
+            MyApplication.personRepository.update(
+                personId,
+                updatedValues);
+            */
             return person;
         }
 
@@ -157,5 +172,52 @@ public class PersonDetailFragment extends Fragment {
             // TODO всегда ли сохраняется результат
             editText.setText(person.getNote());
         }
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX, float distanceY) {
+        return true;
+    }
+
+    @Override
+    public boolean onDoubleTapEvent(MotionEvent event) {
+        return true;
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent event) {
+        return true;
+    }
+
+    @Override
+    public boolean onDown(MotionEvent event) {
+        return true;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent event) {}
+
+    @Override
+    public void onLongPress(MotionEvent event) {}
+
+    @Override
+    public boolean onDoubleTap(MotionEvent event) {
+        return true;
+    }
+
+    @Override
+    public boolean onFling(MotionEvent event1, MotionEvent event2,
+                           float velocityX, float velocityY) {
+        float deltaX = event1.getX() - event2.getX();
+        float deltaY = event1.getY() - event2.getY();
+        if ((Math.abs(deltaY) > Math.abs(deltaX)) && (deltaY < 0)) {
+            getActivity().onBackPressed();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent event) {
+        return true;
     }
 }
