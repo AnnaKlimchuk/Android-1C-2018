@@ -71,11 +71,29 @@ public class Person {
 
     @Override
     public String toString() {
+        String returnedString = "Person{id=";
         if (id == NOT_SPECIFIED_LONG) {
-            return "Person{" + "id=?, name='" + name + "\'" + '}';
+            returnedString = returnedString.concat("?");
         } else {
-            return "Person{" + "id=" + id + ", name='" + name + "\'" + '}';
+            returnedString = returnedString.concat("" + id);
         }
+        if (!name.equals(NOT_SPECIFIED_STRING)) {
+            returnedString = returnedString.concat(", name='" + name + "\'");
+        }
+        if (!note.equals(NOT_SPECIFIED_STRING)) {
+            returnedString = returnedString.concat(", note='" + note + "\'");
+        }
+        if (imageRes != NOT_SPECIFIED_INT) {
+            returnedString = returnedString.concat(", imageRes=" + imageRes);
+        }
+        if (!imageLink.equals(NOT_SPECIFIED_STRING)) {
+            returnedString = returnedString.concat(", imageLink='" + imageLink + "\'");
+        }
+        if (!birthday.equals(NOT_SPECIFIED_STRING)) {
+            returnedString = returnedString.concat(", birthday=" + birthday);
+        }
+        returnedString = returnedString.concat("}");
+        return returnedString;
     }
 }
 

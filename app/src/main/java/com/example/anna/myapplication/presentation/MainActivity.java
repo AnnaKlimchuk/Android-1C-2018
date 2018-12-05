@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         buttonTraining = findViewById(R.id.training_thread);
         buttonTraining.setOnClickListener(view -> {
-            Intent startActivity = new Intent(MainActivity.this, RoomDB.class);
+            Intent startActivity = new Intent(MainActivity.this, TouchActivity.class);
             startActivity(startActivity);
         });
     }

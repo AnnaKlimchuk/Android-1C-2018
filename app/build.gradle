@@ -1,5 +1,13 @@
 apply plugin: 'com.android.application'
 
+def propertiesFilename = "..\\keystores\\release.properties"
+if (!project.file(propertiesFilename).exists()) {
+    propertiesFilename = "..\\keystores\\test_release.properties"
+}
+
+def singingProperties = new Properties()
+singingProperties.load(new FileInputStream(file(propertiesFilename)))
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -10,15 +18,26 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    signingConfigs {
+        release {
+            keyAlias singingProperties.releaseSignKeyAlias
+            keyPassword singingProperties.releaseSignKeyPassword
+            storeFile file(singingProperties.releaseStoreFilePath)
+            storePassword singingProperties.releaseStorePassword
+
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
     }
 }
 
