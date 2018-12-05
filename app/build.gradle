@@ -1,7 +1,12 @@
 apply plugin: 'com.android.application'
 
+def propertiesFilename = "..\\keystores\\release.properties"
+if (!project.file(propertiesFilename).exists()) {
+    propertiesFilename = "..\\keystores\\test_release.properties"
+}
 
 def singingProperties = new Properties()
+singingProperties.load(new FileInputStream(file(propertiesFilename)))
 
 android {
     compileSdkVersion 26
@@ -18,16 +23,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     signingConfigs {
-        debug {
-            singingProperties.load(new FileInputStream(file("..\\keystores\\debug.properties")))
-            keyAlias singingProperties.debugSignKeyAlias
-            keyPassword singingProperties.debugSignKeyPassword
-            storeFile file(singingProperties.debugStoreFilePath)
-            storePassword singingProperties.debugStorePassword
-
-        }
         release {
-            singingProperties.load(new FileInputStream(file("..\\keystores\\release.properties")))
             keyAlias singingProperties.releaseSignKeyAlias
             keyPassword singingProperties.releaseSignKeyPassword
             storeFile file(singingProperties.releaseStoreFilePath)
@@ -41,9 +37,6 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-        }
-        debug {
-            signingConfig signingConfigs.debug
         }
     }
 }
