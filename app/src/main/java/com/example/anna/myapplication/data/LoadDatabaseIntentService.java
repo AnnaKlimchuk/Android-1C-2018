@@ -1,6 +1,5 @@
 package com.example.anna.myapplication.data;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 import android.app.IntentService;
@@ -12,8 +11,6 @@ import com.example.anna.myapplication.presentation.MyApplication;
 
 public class LoadDatabaseIntentService extends IntentService {
 
-    private FileOutputStream fileOutputStream = null;
-
     public LoadDatabaseIntentService() {
         super("LoadDatabaseIntentService");
     }
@@ -23,10 +20,9 @@ public class LoadDatabaseIntentService extends IntentService {
         if (intent != null) {
             String databaseBackup = MyApplication.getPersonDao().loadAll().toString();
             String fileName = intent.getStringExtra("fileName");
-            try {
-                fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+            try(FileOutputStream fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+            ) {
                 fileOutputStream.write(databaseBackup.getBytes());
-                fileOutputStream.close();
             } catch (Exception e) {
                 Toast toast = Toast.makeText(this, "An error occurred while writing database", Toast.LENGTH_LONG);
                 toast.show();
